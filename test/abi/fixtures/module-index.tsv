@@ -1,0 +1,3 @@
+module_path	vermagic	version_record_count	has_nonempty___versions
+/modules/target.ko	6.1.145-android14-11-maybe-dirty SMP preempt mod_unload modversions aarch64 vivo 	3	yes
+/modules/foreign.ko	other	1	yes

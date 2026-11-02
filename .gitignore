@@ -9,7 +9,8 @@ out/
 *.symversions
 Module.symvers
 modules.order
-test/
 dist/
 build/
 node_modules/
+__pycache__/
+*.py[cod]
