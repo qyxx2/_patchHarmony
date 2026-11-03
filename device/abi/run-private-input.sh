@@ -24,3 +24,23 @@ python3 device/abi/extract_crcs.py \
   --module-index "$private_dir/module-index.tsv" \
   --vermagic '6.1.145-android14-11-maybe-dirty SMP preempt mod_unload modversions aarch64 vivo' \
   --output-dir "$reports_dir"
+
+python3 - "$reports_dir/ddk-diagnostics.json" <<'PY'
+import hashlib
+import json
+import pathlib
+import sys
+
+kdir = pathlib.Path("/opt/ddk/kdir/android14-6.1")
+tool = kdir / "scripts/genksyms/genksyms"
+diagnostics = {
+    "schema_version": 1,
+    "kdir_exists": kdir.is_dir(),
+    "genksyms_exists": tool.is_file(),
+    "generated_autoconf_exists": (kdir / "include/generated/autoconf.h").is_file(),
+    "generated_utsrelease_exists": (kdir / "include/generated/utsrelease.h").is_file(),
+}
+if tool.is_file():
+    diagnostics["genksyms_sha256"] = hashlib.sha256(tool.read_bytes()).hexdigest()
+pathlib.Path(sys.argv[1]).write_text(json.dumps(diagnostics, indent=2, sort_keys=True) + "\n")
+PY
