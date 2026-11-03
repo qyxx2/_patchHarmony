@@ -19,3 +19,12 @@ class PrivateInputContractTest(unittest.TestCase):
         self.assertLess(runner.index("sha256sum -c"), runner.index("openssl enc -d"))
         self.assertIn("trap", runner)
         self.assertIn("--module-index", runner)
+
+
+class PrivateInputDocumentationTest(unittest.TestCase):
+    def test_readme_names_all_required_secrets_and_boundary(self):
+        text = (ROOT / "device/abi/README.md").read_text()
+        for name in ["PD2307_INPUT_URL", "PD2307_INPUT_SHA256", "PD2307_INPUT_PASSPHRASE", "PD2307_INPUT_TOKEN"]:
+            self.assertIn(name, text)
+        self.assertIn("workflow_dispatch", text)
+        self.assertIn("does not build or load", text)
