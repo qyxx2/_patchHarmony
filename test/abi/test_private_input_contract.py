@@ -20,6 +20,12 @@ class PrivateInputContractTest(unittest.TestCase):
         self.assertIn("trap", runner)
         self.assertIn("--module-index", runner)
 
+    def test_runner_collects_sanitized_ddk_diagnostics(self):
+        runner = (ROOT / "device/abi/run-private-input.sh").read_text()
+        self.assertIn("ddk-diagnostics.json", runner)
+        self.assertIn("genksyms", runner)
+        self.assertIn("sha256sum", runner)
+
 
 class PrivateInputDocumentationTest(unittest.TestCase):
     def test_readme_names_all_required_secrets_and_boundary(self):
