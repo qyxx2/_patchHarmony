@@ -31,6 +31,12 @@ class PrivateInputContractTest(unittest.TestCase):
         self.assertIn("genksyms-usage.txt", runner)
         self.assertIn("--help", runner)
 
+    def test_runner_runs_minimal_known_symbol_probe(self):
+        runner = (ROOT / "device/abi/run-private-input.sh").read_text()
+        self.assertIn("__stack_chk_fail", runner)
+        self.assertIn("genksyms-probe.txt", runner)
+        self.assertIn(" -D ", runner)
+
 
 class PrivateInputDocumentationTest(unittest.TestCase):
     def test_readme_names_all_required_secrets_and_boundary(self):
