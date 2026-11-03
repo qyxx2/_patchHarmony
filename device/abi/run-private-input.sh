@@ -44,3 +44,5 @@ if tool.is_file():
     diagnostics["genksyms_sha256"] = hashlib.sha256(tool.read_bytes()).hexdigest()
 pathlib.Path(sys.argv[1]).write_text(json.dumps(diagnostics, indent=2, sort_keys=True) + "\n")
 PY
+
+/opt/ddk/kdir/android14-6.1/scripts/genksyms/genksyms --help > "$reports_dir/genksyms-usage.txt" 2>&1 || true

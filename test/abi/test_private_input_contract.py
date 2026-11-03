@@ -26,6 +26,11 @@ class PrivateInputContractTest(unittest.TestCase):
         self.assertIn("genksyms", runner)
         self.assertIn("sha256sum", runner)
 
+    def test_runner_records_genksyms_usage(self):
+        runner = (ROOT / "device/abi/run-private-input.sh").read_text()
+        self.assertIn("genksyms-usage.txt", runner)
+        self.assertIn("--help", runner)
+
 
 class PrivateInputDocumentationTest(unittest.TestCase):
     def test_readme_names_all_required_secrets_and_boundary(self):
