@@ -1,0 +1,27 @@
+name: PD2307 ABI evidence gate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify-input:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/ylarod/ddk-min:android14-6.1-20260313
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify encrypted PD2307 evidence
+        env:
+          PD2307_INPUT_URL: ${{ secrets.PD2307_INPUT_URL }}
+          PD2307_INPUT_SHA256: ${{ secrets.PD2307_INPUT_SHA256 }}
+          PD2307_INPUT_PASSPHRASE: ${{ secrets.PD2307_INPUT_PASSPHRASE }}
+          PD2307_INPUT_TOKEN: ${{ secrets.PD2307_INPUT_TOKEN }}
+        run: device/abi/run-private-input.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pd2307-abi-input-report
+          path: reports/
+          if-no-files-found: error
+          include-hidden-files: false

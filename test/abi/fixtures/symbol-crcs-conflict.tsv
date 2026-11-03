@@ -1,0 +1,3 @@
+symbol	crc	source_module
+alpha	0x00000001	/modules/target.ko
+alpha	0x00000002	/modules/target.ko
