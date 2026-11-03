@@ -36,6 +36,7 @@ class PrivateInputContractTest(unittest.TestCase):
         self.assertIn("__stack_chk_fail", runner)
         self.assertIn("genksyms-probe.txt", runner)
         self.assertIn(" -D ", runner)
+        self.assertIn("EXPORT_SYMBOL(__stack_chk_fail)", runner)
 
 
 class PrivateInputDocumentationTest(unittest.TestCase):
