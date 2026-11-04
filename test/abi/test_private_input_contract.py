@@ -35,7 +35,7 @@ class PrivateInputContractTest(unittest.TestCase):
         runner = (ROOT / "device/abi/run-private-input.sh").read_text()
         self.assertIn("__stack_chk_fail", runner)
         self.assertIn("genksyms-probe.txt", runner)
-        self.assertIn(" -D ", runner)
+        self.assertIn(" -a -D ", runner)
         self.assertIn("EXPORT_SYMBOL(__stack_chk_fail)", runner)
 
 

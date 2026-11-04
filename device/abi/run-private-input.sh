@@ -48,4 +48,4 @@ PY
 /opt/ddk/kdir/android14-6.1/scripts/genksyms/genksyms --help > "$reports_dir/genksyms-usage.txt" 2>&1 || true
 
 printf 'extern void __stack_chk_fail(void);\nEXPORT_SYMBOL(__stack_chk_fail);\n' > "$private_dir/genksyms-probe.c"
-/opt/ddk/kdir/android14-6.1/scripts/genksyms/genksyms -D < "$private_dir/genksyms-probe.c" > "$reports_dir/genksyms-probe.txt"
+/opt/ddk/kdir/android14-6.1/scripts/genksyms/genksyms -a -D < "$private_dir/genksyms-probe.c" > "$reports_dir/genksyms-probe.txt" 2>&1
